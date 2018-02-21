@@ -1,0 +1,26 @@
+---
+# tasks file for mariadb-secure
+- name: copy encryption key
+  copy:
+    src: "{{ inventory_dir }}/storage/mariadb-secure/key.enc"
+    dest: "/etc/mysql/key.enc"
+- name: configure file key management
+  template:
+    src: "etc/mysql/conf.d/secure.cnf.j2"
+    dest: "/etc/mysql/conf.d/secure.cnf"
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o=r"
+
+- name: "restart mariadb"
+  service:
+    name: "mariadb.service"
+    state: "restarted"
+  when: inventory_hostname != galera_mysql_master_node
+
+- name: "restart mariadb master"
+  service:
+    name: "mariadb.service"
+    state: "restarted"
+  when: inventory_hostname == galera_mysql_master_node
+
