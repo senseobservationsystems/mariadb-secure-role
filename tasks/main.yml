@@ -2,7 +2,7 @@
 # tasks file for mariadb-secure
 - name: copy encryption key
   copy:
-    src: "{{ inventory_dir }}/storage/mariadb-secure/key.enc"
+    src: "{{ mariadb_secure_file }}"
     dest: "/etc/mysql/key.enc"
 - name: configure file key management
   template:

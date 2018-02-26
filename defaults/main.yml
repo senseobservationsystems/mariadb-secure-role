@@ -3,3 +3,4 @@
 mariadb_secure_filepath: "/etc/mysql/key.enc"
 mariadb_secure_key: "thisismykey"
 mariadb_secure_encrypt_algorithm: "aes_ctr"
+mariadb_secure_file: "key.enc"
